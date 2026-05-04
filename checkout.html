@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Virendra Textrioum</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#090a0f', secondary: '#2c2d33', accent: '#cfb53b', surface: '#f9f9fa' } } } }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-surface text-primary antialiased flex flex-col min-h-screen">
+    <nav class="py-6 bg-white border-b border-gray-100 mb-12">
+        <div class="container mx-auto px-6 text-center">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <img src="logo/IMG_2014.PNG" class="h-10 md:h-12 w-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-xl md:text-2xl font-serif font-bold tracking-[0.25em] uppercase gold-gradient-text drop-shadow-lg transition-all duration-500 hidden sm:block">Virendra Textrioum</span>
+            </a>
+            <p class="text-xs text-gray-500 uppercase tracking-widest mt-2">Secure Checkout</p>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-6 md:px-12 pb-24 max-w-5xl" x-data="{ complete: false }">
+        <div x-show="!complete" class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Form -->
+            <form @submit.prevent="complete = true" class="space-y-8">
+                <div>
+                    <h2 class="text-xl font-serif mb-4">Contact Information</h2>
+                    <input type="email" placeholder="Email address" required class="w-full border border-gray-300 p-3 mb-4 focus:outline-none focus:border-primary">
+                </div>
+                
+                <div>
+                    <h2 class="text-xl font-serif mb-4">Shipping Address</h2>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <input type="text" placeholder="First name" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                        <input type="text" placeholder="Last name" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                    </div>
+                    <input type="text" placeholder="Address" required class="w-full border border-gray-300 p-3 mb-4 focus:outline-none focus:border-primary">
+                    <div class="grid grid-cols-3 gap-4">
+                        <input type="text" placeholder="City" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                        <input type="text" placeholder="State" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                        <input type="text" placeholder="PIN code" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-serif mb-4">Payment Info</h2>
+                    <input type="text" placeholder="Card number" required class="w-full border border-gray-300 p-3 mb-4 focus:outline-none focus:border-primary">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="MM/YY" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                        <input type="text" placeholder="CVV" required class="w-full border border-gray-300 p-3 focus:outline-none focus:border-primary">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-primary text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-accent transition-colors">
+                    Pay Now
+                </button>
+            </form>
+
+            <!-- Summary -->
+            <div class="bg-gray-50 p-8 h-fit">
+                <h3 class="text-xl font-serif mb-6 pb-4 border-b border-gray-200">Order Summary</h3>
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="relative">
+                            <img src="img/img15.jpg" class="w-16 h-16 object-cover border border-gray-200">
+                            <span class="absolute -top-2 -right-2 bg-gray-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">1</span>
+                        </div>
+                        <span class="text-sm">Royal Handloom Kurta (40)</span>
+                    </div>
+                    <span class="text-sm text-gray-500">₹8,500</span>
+                </div>
+                <div class="border-t border-gray-200 pt-4 mb-4 text-sm text-gray-600 flex justify-between">
+                    <span>Subtotal</span>
+                    <span>₹8,500</span>
+                </div>
+                <div class="text-sm text-gray-600 flex justify-between mb-4">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="border-t border-gray-200 pt-4 flex justify-between font-bold text-lg">
+                    <span>Total</span>
+                    <span>₹8,500</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div x-show="complete" x-cloak class="text-center py-24">
+            <i data-lucide="check-circle" class="w-20 h-20 text-accent mx-auto mb-6"></i>
+            <h1 class="text-4xl font-serif mb-4">Order Confirmed.</h1>
+            <p class="text-gray-500 mb-8">Thank you for your purchase. Your order number is #VT-202684.</p>
+            <a href="index.html" class="inline-block bg-primary text-white px-10 py-4 uppercase tracking-widest text-sm hover:bg-accent transition-colors">Return to Home</a>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
+

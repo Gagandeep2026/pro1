@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Handloom Kurta | Virendra Textrioum</title>
+    <meta name="description" content="Product details for the Royal Handloom Kurta">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#090a0f',
+                        secondary: '#2c2d33',
+                        accent: '#cfb53b',
+                        surface: '#f9f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-surface text-primary antialiased flex flex-col min-h-screen">
+    <nav class="py-6 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 text-center flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group mx-auto">
+                <img src="logo/IMG_2014.PNG" class="h-10 md:h-12 w-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-xl md:text-2xl font-serif font-bold tracking-[0.25em] uppercase gold-gradient-text drop-shadow-lg transition-all duration-500 hidden sm:block">Virendra Textrioum</span>
+            </a>
+            <a href="cart.html" class="absolute right-6 top-6 hover:text-accent transition-colors relative">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="flex-grow py-16" x-data="{ 
+        activeImage: 'img/img15.jpg',
+        qty: 1,
+        size: null,
+        added: false
+    }">
+        <div class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-12">
+            
+            <!-- Gallery -->
+            <div class="w-full md:w-1/2 flex flex-col-reverse md:flex-row gap-4">
+                <div class="flex md:flex-col gap-4 overflow-x-auto md:overflow-y-auto">
+                    <button @click="activeImage = 'img/img15.jpg'" class="w-20 h-24 flex-shrink-0 border" :class="activeImage === 'img/img15.jpg' ? 'border-primary' : 'border-transparent opacity-50'">
+                        <img src="img/img15.jpg" alt="Thumb" class="w-full h-full object-cover">
+                    </button>
+                    <button @click="activeImage = 'img/img19.jpg'" class="w-20 h-24 flex-shrink-0 border border-transparent opacity-50 hover:opacity-100">
+                        <img src="img/img19.jpg" alt="Thumb" class="w-full h-full object-cover grayscale">
+                    </button>
+                </div>
+                <div class="flex-grow bg-gray-100 relative h-[600px]">
+                    <img :src="activeImage" alt="Product Image" class="w-full h-full object-cover transition-opacity duration-300">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="w-full md:w-1/2 md:py-8">
+                <nav class="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">
+                    <a href="index.html" class="hover:text-primary">Home</a> / 
+                    <a href="shop.html" class="hover:text-primary">Shop</a> / 
+                    <span class="text-primary">Royal Handloom Kurta</span>
+                </nav>
+                <h1 class="text-4xl font-serif mb-2">Royal Handloom Kurta</h1>
+                <p class="text-2xl font-light text-gray-500 mb-8">₹8,500.00</p>
+                
+                <p class="text-gray-600 leading-relaxed mb-8">
+                    An elegant classic rooted in Indian heritage. Woven from premium sustainable handloom cotton, this tailored kurta features delicate thread-work along the mandarin collar, providing undeniable sophistication for festive seasons and formal gatherings alike.
+                </p>
+
+                <!-- Size Selector -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-bold uppercase tracking-widest">Size</span>
+                        <a href="faq.html" class="text-xs text-gray-400 underline hover:text-primary">Size Guide</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <template x-for="item in ['38', '40', '42', '44', '46']">
+                            <button @click="size = item" 
+                                class="w-12 h-12 border flex items-center justify-center text-sm transition-colors"
+                                :class="size === item ? 'border-primary bg-primary text-white' : 'border-gray-200 hover:border-gray-400'">
+                                <span x-text="item"></span>
+                            </button>
+                        </template>
+                    </div>
+                    <p x-show="added && !size" class="text-red-500 text-xs mt-2" x-cloak>Please select a size.</p>
+                </div>
+
+                <!-- Action -->
+                <div class="flex space-x-4 mb-10">
+                    <div class="border border-gray-200 flex items-center w-32">
+                        <button @click="if(qty > 1) qty--" class="w-10 h-10 flex justify-center items-center text-gray-500 hover:text-primary">-</button>
+                        <input type="text" x-model="qty" class="w-full text-center bg-transparent focus:outline-none" readonly>
+                        <button @click="qty++" class="w-10 h-10 flex justify-center items-center text-gray-500 hover:text-primary">+</button>
+                    </div>
+                    <button @click="if(size) { added = true; setTimeout(() => added = false, 3000) } else { added = true }" 
+                            class="flex-grow bg-primary text-white uppercase tracking-widest font-bold text-sm hover:bg-accent hover:text-white transition-colors">
+                        <span x-show="!added || !size">Add to Cart</span>
+                        <span x-show="added && size" x-cloak>Added to Cart!</span>
+                    </button>
+                </div>
+
+                <!-- Accordion Info -->
+                <div class="border-t border-gray-200" x-data="{ t1: true, t2: false }">
+                    <div class="border-b border-gray-200">
+                        <button @click="t1 = !t1" class="w-full py-4 flex justify-between items-center text-sm font-bold uppercase tracking-widest">
+                            Details
+                            <i data-lucide="plus" class="w-4 h-4 transition-transform" :class="t1 ? 'rotate-45' : ''"></i>
+                        </button>
+                        <div x-show="t1" x-collapse class="pb-4 text-sm text-gray-600 leading-relaxed">
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>100% Handloom Cotton</li>
+                                <li>Mandarin collar with intricate embroidery</li>
+                                <li>Side slits for ease of movement</li>
+                                <li>Dry clean only recommended</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-b border-gray-200">
+                        <button @click="t2 = !t2" class="w-full py-4 flex justify-between items-center text-sm font-bold uppercase tracking-widest">
+                            Shipping & Returns
+                            <i data-lucide="plus" class="w-4 h-4 transition-transform" :class="t2 ? 'rotate-45' : ''"></i>
+                        </button>
+                        <div x-show="t2" x-collapse class="pb-4 text-sm text-gray-600 leading-relaxed" x-cloak>
+                            Free standard shipping across India on orders over ₹10,000. Returns accepted within 15 days of receipt in unworn condition.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
+

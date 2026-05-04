@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Virendra Textrioum</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#090a0f', secondary: '#2c2d33', accent: '#cfb53b', surface: '#f9f9fa' } } } }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-surface text-primary antialiased flex flex-col min-h-screen">
+    <nav class="py-6 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 text-center">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <img src="logo/IMG_2014.PNG" class="h-10 md:h-12 w-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-xl md:text-2xl font-serif font-bold tracking-[0.25em] uppercase gold-gradient-text drop-shadow-lg transition-all duration-500 hidden sm:block">Virendra Textrioum</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-16 container mx-auto px-6 md:px-12 pb-24" x-data="{ items: [{id: 1, name: 'Royal Handloom Kurta', price: 8500, qty: 1, img: 'img/img15.jpg'}], 
+        get subtotal() { return this.items.reduce((acc, item) => acc + (item.price * item.qty), 0); } 
+    }">
+        <h1 class="text-4xl font-serif mb-10 text-center">Your Bag</h1>
+
+        <template x-if="items.length > 0">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Items list -->
+                <div class="lg:col-span-2 space-y-6">
+                    <template x-for="(item, index) in items" :key="item.id">
+                        <div class="flex gap-6 py-6 border-b border-gray-100">
+                            <img :src="item.img" alt="Product" class="w-24 h-32 object-cover bg-gray-100">
+                            <div class="flex-grow flex flex-col justify-between">
+                                <div class="flex justify-between">
+                                    <h3 class="font-serif text-lg" x-text="item.name"></h3>
+                                    <p class="text-gray-500" x-text="'₹' + item.price.toLocaleString('en-IN')"></p>
+                                </div>
+                                <p class="text-sm text-gray-400">Size: 40</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <div class="border border-gray-200 flex items-center w-24">
+                                        <button @click="if(item.qty > 1) item.qty--" class="w-8 h-8 flex justify-center items-center text-gray-500">-</button>
+                                        <input type="text" x-model="item.qty" class="w-full text-center bg-transparent focus:outline-none text-sm" readonly>
+                                        <button @click="item.qty++" class="w-8 h-8 flex justify-center items-center text-gray-500">+</button>
+                                    </div>
+                                    <button @click="items.splice(index, 1)" class="text-xs uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="bg-gray-50 p-8">
+                    <h3 class="text-xl font-serif mb-6 pb-4 border-b border-gray-200">Order Summary</h3>
+                    <div class="flex justify-between mb-4 text-sm text-gray-600">
+                        <span>Subtotal</span>
+                        <span x-text="'₹' + subtotal.toLocaleString('en-IN')"></span>
+                    </div>
+                    <div class="flex justify-between mb-6 text-sm text-gray-600">
+                        <span>Shipping</span>
+                        <span>Calculated at checkout</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-lg border-t border-gray-200 pt-4 mb-8">
+                        <span>Estimated Total</span>
+                        <span x-text="'₹' + subtotal.toLocaleString('en-IN')"></span>
+                    </div>
+                    <a href="checkout.html" class="block text-center bg-primary text-white w-full py-4 uppercase tracking-widest text-sm font-bold hover:bg-accent transition-colors">
+                        Proceed to Checkout
+                    </a>
+                </div>
+            </div>
+        </template>
+        
+        <template x-if="items.length === 0">
+            <div class="text-center py-20">
+                <i data-lucide="shopping-bag" class="w-16 h-16 text-gray-300 mx-auto mb-6"></i>
+                <h3 class="font-serif text-2xl mb-4">Your bag is empty</h3>
+                <a href="shop.html" class="inline-block border border-primary text-primary px-8 py-3 uppercase tracking-widest text-sm hover:bg-primary hover:text-white transition-colors">Continue Shopping</a>
+            </div>
+        </template>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+html {
+    scroll-behavior: smooth;
+    /* Subtle noise texture for a royal bespoke paper feel */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f5f3; /* Rich off-white */
+    color: #090a0f;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Slight depth for royalty */
+}
+
+/* Glassmorphism Utilities with Royal Edges */
+.glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(207, 181, 59, 0.3); /* Gold trim */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-dark {
+    background: rgba(9, 10, 15, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(207, 181, 59, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Smooth Transitions & Luxurious Hovers */
+.transition-slow {
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift {
+    border: 1px solid transparent;
+}
+.hover-lift:hover {
+    transform: translateY(-6px) scale(0.99);
+    border-color: rgba(207, 181, 59, 0.4);
+    box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 15px -5px rgba(207, 181, 59, 0.1);
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #090a0f; 
+}
+::-webkit-scrollbar-thumb {
+    background: #cfb53b; 
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #b39b33; 
+}
+
+/* Alpine.js Cloak */
+[x-cloak] { display: none !important; }
+
+/* Custom Accents */
+::selection {
+    background-color: #cfb53b;
+    color: #fff;
+}
+
+.gold-gradient-text {
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}

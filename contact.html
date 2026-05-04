@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Services | Virendra Textrioum</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#090a0f', secondary: '#2c2d33', accent: '#cfb53b', surface: '#f9f9fa' } } } }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 200ms; }
+        .glass-panel {
+            background: rgba(9, 10, 15, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(207, 181, 59, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            opacity: 0.45;
+            filter: grayscale(40%) contrast(1.1);
+        }
+    </style>
+</head>
+<body class="bg-primary text-white antialiased flex flex-col min-h-screen">
+
+    <!-- Premium Navigation -->
+    <nav class="fixed w-full z-50 glass-dark transition-slow py-4 border-b border-accent/20" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)" :class="{ 'py-2': scrolled, 'py-5': !scrolled }">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <img src="logo/IMG_2014.PNG" class="h-10 md:h-12 w-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-lg md:text-xl font-serif font-light tracking-[0.25em] uppercase gold-gradient-text drop-shadow-lg transition-all duration-500 hidden sm:block">Virendra Textrioum</span>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center text-xs uppercase tracking-widest font-semibold text-white">
+                <a href="shop.html" class="hover:text-accent transition-colors">Shop</a>
+                <a href="lookbook.html" class="hover:text-accent transition-colors">Lookbook</a>
+                <a href="about.html" class="hover:text-accent transition-colors">Heritage</a>
+                <a href="contact.html" class="text-accent border-b border-accent pb-1">Client Services</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cinematic Main Area -->
+    <main class="flex-grow flex items-center justify-center relative min-h-screen pt-24 pb-20">
+        
+        <!-- Video Background -->
+        <div class="video-container">
+            <video autoplay loop muted playsinline>
+                <!-- Tailoring/Sewing video to reflect premium craftsmanship -->
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-tailor-working-on-a-sewing-machine-34444-large.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/95 via-primary/60 to-primary/95 mix-blend-multiply"></div>
+        </div>
+
+        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+            
+            <!-- Information Panel -->
+            <div class="flex flex-col justify-center space-y-12" x-data="{ active: false }" x-intersect.threshold.20="active = true">
+                <div class="reveal" :class="{ 'active': active }">
+                    <p class="uppercase tracking-[0.4em] text-accent text-xs font-bold mb-4">Dedicated Support</p>
+                    <h1 class="text-5xl md:text-7xl font-serif mb-8 text-white leading-tight">Private <br><span class="italic text-accent">Bespoke</span> Queries</h1>
+                    <div class="w-24 h-[1px] bg-accent mb-8"></div>
+                    <p class="text-gray-300 font-light text-lg max-w-md leading-relaxed">
+                        Our master advisors are available to assist you with elite style advice, measuring instructions, and bespoke order inquiries.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 reveal reveal-delay-1" :class="{ 'active': active }">
+                    <div>
+                        <i data-lucide="map-pin" class="w-6 h-6 text-accent mb-4"></i>
+                        <h3 class="uppercase tracking-widest text-xs text-white font-bold mb-2">The Atelier</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">
+                            128 Fashion Avenue<br>
+                            Surat, Gujarat<br>
+                            India
+                        </p>
+                    </div>
+                    <div>
+                        <i data-lucide="phone-call" class="w-6 h-6 text-accent mb-4"></i>
+                        <h3 class="uppercase tracking-widest text-xs text-white font-bold mb-2">Direct Lines</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">
+                            Tel: +91 98765 43210<br>
+                            clients@virendratextrioum.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glassmorphism Form -->
+            <div class="glass-panel p-10 md:p-14 rounded-sm reveal reveal-delay-1" x-data="{ active: false, sent: false }" x-intersect.threshold.20="active = true" :class="{ 'active': active }">
+                
+                <form x-show="!sent" @submit.prevent="sent = true" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="relative group">
+                            <input type="text" id="fname" required class="w-full bg-transparent border-b border-gray-600 py-3 text-white focus:outline-none focus:border-accent transition-colors peer placeholder-transparent" placeholder="First Name">
+                            <label for="fname" class="absolute left-0 -top-3.5 text-xs text-accent uppercase tracking-widest font-semibold transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-accent">First Name</label>
+                        </div>
+                        <div class="relative group">
+                            <input type="text" id="lname" required class="w-full bg-transparent border-b border-gray-600 py-3 text-white focus:outline-none focus:border-accent transition-colors peer placeholder-transparent" placeholder="Last Name">
+                            <label for="lname" class="absolute left-0 -top-3.5 text-xs text-accent uppercase tracking-widest font-semibold transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-accent">Last Name</label>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <input type="email" id="email" required class="w-full bg-transparent border-b border-gray-600 py-3 text-white focus:outline-none focus:border-accent transition-colors peer placeholder-transparent" placeholder="Email Address">
+                        <label for="email" class="absolute left-0 -top-3.5 text-xs text-accent uppercase tracking-widest font-semibold transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-accent">Email Address</label>
+                    </div>
+
+                    <div class="relative group">
+                        <textarea id="message" required rows="4" class="w-full bg-transparent border-b border-gray-600 py-3 text-white focus:outline-none focus:border-accent transition-colors peer resize-none placeholder-transparent" placeholder="Your Message"></textarea>
+                        <label for="message" class="absolute left-0 -top-3.5 text-xs text-accent uppercase tracking-widest font-semibold transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-accent">Your Message</label>
+                    </div>
+
+                    <button type="submit" class="w-full mt-4 bg-accent text-primary px-8 py-4 uppercase tracking-[0.2em] text-xs font-bold hover:bg-yellow-600 hover:text-white transition-all shadow-lg hover:shadow-accent/30 duration-300">
+                        Dispatch Request
+                    </button>
+                </form>
+
+                <!-- Success State -->
+                <div x-show="sent" x-cloak class="text-center py-16 flex flex-col items-center">
+                    <div class="w-20 h-20 rounded-full border border-accent flex items-center justify-center mb-6 bg-accent/10">
+                        <i data-lucide="check" class="w-8 h-8 text-accent"></i>
+                    </div>
+                    <h3 class="font-serif text-3xl mb-4 text-white">Transmission Successful</h3>
+                    <p class="text-gray-400 font-light leading-relaxed max-w-sm">Your royal inquiry has been securely routed to our master tailors. You will be contacted shortly.</p>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

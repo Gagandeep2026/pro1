@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Collection | Virendra Textrioum</title>
+    <meta name="description" content="Shop the majestic Indian menswear collections at Virendra Textrioum.">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: '#050507', 
+                        secondary: '#1a1b21', 
+                        accent: '#d4af37', 
+                        accentDark: '#aa8c2c',
+                        surface: '#f3f1ec' 
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                } 
+            } 
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .reveal-delay-1 { transition-delay: 150ms; }
+        .reveal-delay-2 { transition-delay: 300ms; }
+
+        .gold-gradient-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .glass-premium {
+            background: rgba(5, 5, 7, 0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        .custom-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 2px;
+            background: rgba(255,255,255,0.05);
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .custom-checkbox:checked {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            border-color: #d4af37;
+        }
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 4px;
+            height: 8px;
+            border: solid #050507;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-primary text-surface antialiased flex flex-col min-h-screen selection:bg-accent selection:text-primary">
+
+    <!-- Premium Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-700 py-4 border-b border-white/5 bg-primary/95 backdrop-blur-md shadow-2xl" 
+         x-data="{ scrolled: false }" 
+         @scroll.window="scrolled = (window.pageYOffset > 50)" 
+         :class="{ 'py-3': scrolled, 'py-5': !scrolled }">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <img src="logo/IMG_2014.PNG" class="h-10 md:h-12 w-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-xl md:text-2xl font-serif font-bold tracking-[0.25em] uppercase gold-gradient-text drop-shadow-lg transition-all duration-500 hidden sm:block">Virendra Textrioum</span>
+            </a>
+            <div class="hidden md:flex space-x-10 items-center text-xs uppercase tracking-[0.2em] font-semibold text-gray-300">
+                <a href="shop.html" class="text-accent relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[1px] after:bg-accent">Shop</a>
+                <a href="lookbook.html" class="hover:text-accent transition-colors duration-300">Lookbook</a>
+                <a href="about.html" class="hover:text-accent transition-colors duration-300">Heritage</a>
+                <div class="flex space-x-6 ml-6 border-l border-white/10 pl-6">
+                    <a href="#" class="hover:text-accent transition-colors"><i data-lucide="search" class="w-5 h-5"></i></a>
+                    <a href="cart.html" class="hover:text-accent transition-colors relative group">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-primary font-bold text-[9px] w-4 h-4 flex items-center justify-center rounded-full shadow-sm">0</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-white hover:text-accent focus:outline-none flex gap-4 items-center">
+                <a href="cart.html" class="relative text-white">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span class="absolute -top-1 -right-2 bg-accent text-primary text-[9px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                </a>
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-24 overflow-hidden" x-data="{ sortOpen: false }">
+        
+        <!-- Refined Header -->
+        <header class="container mx-auto px-6 md:px-12 mb-20 text-center relative" x-data="{ shown: false }" x-init="setTimeout(() => shown = true, 100)">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-accent/5 blur-[120px] rounded-full pointer-events-none"></div>
+            
+            <p class="uppercase tracking-[0.4em] text-accent text-xs font-bold mb-4 transition-all duration-1000 transform" :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">Curated Selections</p>
+            <h1 class="text-5xl md:text-7xl font-serif mb-6 text-white transition-all duration-1000 delay-200 transform" :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'">The Royal Collection</h1>
+            
+            <div class="flex items-center justify-center gap-4 transition-all duration-1000 delay-500" :class="shown ? 'opacity-100' : 'opacity-0'">
+                <span class="w-16 h-[1px] bg-accent/50"></span>
+                <i data-lucide="diamond" class="w-3 h-3 text-accent animate-pulse-slow"></i>
+                <span class="w-16 h-[1px] bg-accent/50"></span>
+            </div>
+        </header>
+
+        <div class="container mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16">
+            
+            <!-- Minimalist Filters Sidebar -->
+            <aside class="hidden lg:block w-full lg:w-1/5 shrink-0" x-data="{ active: false }" x-intersect="active = true">
+                <div class="sticky top-32 space-y-12 reveal" :class="{ 'active': active }">
+                    
+                    <!-- Categories -->
+                    <div>
+                        <h3 class="font-serif text-2xl mb-4 text-white tracking-wide">Categories</h3>
+                        <div class="w-8 h-[1px] bg-accent mb-6"></div>
+                        <ul class="space-y-4 text-sm text-gray-400 font-light tracking-[0.05em]">
+                            <li><a href="#" class="text-accent flex justify-between items-center group"><span class="group-hover:translate-x-1 transition-transform">All Arrivals</span> <span>(45)</span></a></li>
+                            <li><a href="#" class="hover:text-white flex justify-between items-center group"><span class="group-hover:translate-x-1 transition-transform">Sherwanis</span> <span>(12)</span></a></li>
+                            <li><a href="#" class="hover:text-white flex justify-between items-center group"><span class="group-hover:translate-x-1 transition-transform">Silk Kurtas</span> <span>(18)</span></a></li>
+                            <li><a href="#" class="hover:text-white flex justify-between items-center group"><span class="group-hover:translate-x-1 transition-transform">Nehru Jackets</span> <span>(9)</span></a></li>
+                            <li><a href="#" class="hover:text-white flex justify-between items-center group"><span class="group-hover:translate-x-1 transition-transform">Bespoke Suits</span> <span>(6)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Material Filter -->
+                    <div>
+                        <h3 class="font-serif text-2xl mb-4 text-white tracking-wide">Materials</h3>
+                        <div class="w-8 h-[1px] bg-accent mb-6"></div>
+                        <ul class="space-y-4 text-sm text-gray-400 font-light tracking-[0.05em]">
+                            <li class="flex items-center gap-4 hover:text-white transition-colors cursor-pointer"><input type="checkbox" class="custom-checkbox cursor-pointer" id="mat1"> <label for="mat1" class="cursor-pointer">Banarasi Silk</label></li>
+                            <li class="flex items-center gap-4 hover:text-white transition-colors cursor-pointer"><input type="checkbox" class="custom-checkbox cursor-pointer" id="mat2"> <label for="mat2" class="cursor-pointer">Khadi Cotton</label></li>
+                            <li class="flex items-center gap-4 hover:text-white transition-colors cursor-pointer"><input type="checkbox" class="custom-checkbox cursor-pointer" id="mat3"> <label for="mat3" class="cursor-pointer">Raw Silk</label></li>
+                            <li class="flex items-center gap-4 hover:text-white transition-colors cursor-pointer"><input type="checkbox" class="custom-checkbox cursor-pointer" id="mat4"> <label for="mat4" class="cursor-pointer">Velvet</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid Area -->
+            <div class="w-full lg:w-4/5">
+                
+                <!-- Subtle Toolbar -->
+                <div class="flex justify-between items-center mb-10 pb-4 border-b border-white/10" x-data="{ active: false }" x-intersect="active = true">
+                    <div class="text-xs text-gray-500 uppercase tracking-widest reveal" :class="{ 'active': active }">
+                        Viewing <span class="text-white">1-9</span> of 45
+                    </div>
+                    
+                    <div class="relative reveal" :class="{ 'active': active }" @click.away="sortOpen = false">
+                        <button @click="sortOpen = !sortOpen" class="flex items-center text-xs text-white uppercase tracking-widest hover:text-accent transition-colors">
+                            Sort By <i data-lucide="chevron-down" class="w-3 h-3 ml-2 transition-transform" :class="{'rotate-180': sortOpen}"></i>
+                        </button>
+                        <div x-show="sortOpen" x-transition.opacity x-cloak class="absolute right-0 mt-4 w-56 glass-premium border border-accent/20 z-20 py-2">
+                            <a href="#" class="block px-6 py-3 text-xs uppercase tracking-widest text-gray-300 hover:text-accent hover:bg-white/5 transition-colors">Featured Edit</a>
+                            <a href="#" class="block px-6 py-3 text-xs uppercase tracking-widest text-gray-300 hover:text-accent hover:bg-white/5 transition-colors">Price: Low to High</a>
+                            <a href="#" class="block px-6 py-3 text-xs uppercase tracking-widest text-gray-300 hover:text-accent hover:bg-white/5 transition-colors">Price: High to Low</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12" x-data="{ active: false }" x-intersect.threshold.10="active = true">
+                    
+                    <!-- Product 1 -->
+                    <div class="group relative reveal" :class="{ 'active': active }">
+                        <a href="product.html" class="block relative overflow-hidden h-[500px] border border-white/5">
+                            <img src="img/img15.jpg" alt="Royal Handloom Kurta" class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                            <span class="absolute top-4 left-4 bg-accent text-primary text-[9px] uppercase tracking-[0.2em] font-bold px-3 py-1 shadow-lg">New Arrival</span>
+                        </a>
+                        <div class="pt-6 text-center transition-all duration-500 group-hover:-translate-y-2">
+                            <h3 class="font-serif text-2xl mb-2 text-white"><a href="product.html" class="hover:text-accent border-b border-transparent hover:border-accent transition-all pb-1">Royal Handloom Kurta</a></h3>
+                            <p class="text-accent tracking-widest text-sm font-light mt-2">₹8,500</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="group relative reveal reveal-delay-1" :class="{ 'active': active }">
+                        <a href="product.html" class="block relative overflow-hidden h-[500px] border border-white/5">
+                            <img src="img/img16.jpg" alt="Embroidered Bandhgala" class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                        </a>
+                        <div class="pt-6 text-center transition-all duration-500 group-hover:-translate-y-2">
+                            <h3 class="font-serif text-2xl mb-2 text-white"><a href="product.html" class="hover:text-accent border-b border-transparent hover:border-accent transition-all pb-1">Embroidered Bandhgala</a></h3>
+                            <p class="text-accent tracking-widest text-sm font-light mt-2">₹24,000</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="group relative reveal reveal-delay-2" :class="{ 'active': active }">
+                        <a href="product.html" class="block relative overflow-hidden h-[500px] border border-white/5">
+                            <img src="img/img17.jpg" alt="Classic Two-Piece Suit" class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                        </a>
+                        <div class="pt-6 text-center transition-all duration-500 group-hover:-translate-y-2">
+                            <h3 class="font-serif text-2xl mb-2 text-white"><a href="product.html" class="hover:text-accent border-b border-transparent hover:border-accent transition-all pb-1">Bespoke Two-Piece Suit</a></h3>
+                            <p class="text-accent tracking-widest text-sm font-light mt-2">₹32,500</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="group relative reveal" :class="{ 'active': active }">
+                        <a href="product.html" class="block relative overflow-hidden h-[500px] border border-white/5">
+                            <img src="img/img18.jpg" alt="Silk Blend Nehru Jacket" class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                        </a>
+                        <div class="pt-6 text-center transition-all duration-500 group-hover:-translate-y-2">
+                            <h3 class="font-serif text-2xl mb-2 text-white"><a href="product.html" class="hover:text-accent border-b border-transparent hover:border-accent transition-all pb-1">Silk Nehru Jacket</a></h3>
+                            <p class="text-accent tracking-widest text-sm font-light mt-2">₹12,800</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="group relative reveal reveal-delay-1" :class="{ 'active': active }">
+                        <a href="product.html" class="block relative overflow-hidden h-[500px] border border-white/5">
+                            <img src="img/img19.jpg" alt="Ivory Silk Sherwani" class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                        </a>
+                        <div class="pt-6 text-center transition-all duration-500 group-hover:-translate-y-2">
+                            <h3 class="font-serif text-2xl mb-2 text-white"><a href="product.html" class="hover:text-accent border-b border-transparent hover:border-accent transition-all pb-1">Ivory Silk Sherwani</a></h3>
+                            <p class="text-accent tracking-widest text-sm font-light mt-2">₹45,000</p>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="group relative reveal reveal-delay-2" :class="{ 'active': active }">
+                        <a href="product.html" class="block relative overflow-hidden h-[500px] border border-white/5">
+                            <img src="img/img110.jpg" alt="Velvet Bandi" class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                            <span class="absolute top-4 left-4 bg-white text-primary text-[9px] uppercase tracking-[0.2em] font-bold px-3 py-1 shadow-lg">Limited Edition</span>
+                        </a>
+                        <div class="pt-6 text-center transition-all duration-500 group-hover:-translate-y-2">
+                            <h3 class="font-serif text-2xl mb-2 text-white"><a href="product.html" class="hover:text-accent border-b border-transparent hover:border-accent transition-all pb-1">Onyx Velvet Bandi</a></h3>
+                            <p class="text-accent tracking-widest text-sm font-light mt-2">₹15,200</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elegant Pagination -->
+                <div class="mt-24 flex justify-center items-center space-x-8 border-t border-white/10 pt-12" x-data="{ active: false }" x-intersect="active = true">
+                    <div class="reveal" :class="{ 'active': active }">
+                        <a href="#" class="text-gray-500 hover:text-accent transition-colors flex items-center gap-2 text-xs uppercase tracking-[0.2em] opacity-50 cursor-not-allowed"><i data-lucide="arrow-left" class="w-4 h-4"></i> Prev</a>
+                    </div>
+                    <div class="flex space-x-6 text-sm font-serif reveal reveal-delay-1" :class="{ 'active': active }">
+                        <a href="#" class="text-accent border-b border-accent pb-1">1</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors">2</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition-colors">3</a>
+                    </div>
+                    <div class="reveal reveal-delay-2" :class="{ 'active': active }">
+                        <a href="#" class="text-white hover:text-accent transition-colors flex items-center gap-2 text-xs uppercase tracking-[0.2em]">Next <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Exquisite Footer -->
+    <footer class="bg-primary text-white pt-24 pb-8 border-t-4 border-accent relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[400px] text-white/[0.02] font-serif italic pointer-events-none select-none overflow-hidden flex items-center justify-center">
+            V
+        </div>
+        
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20 items-start">
+                <div class="md:col-span-5 text-center md:text-left">
+                    <a href="index.html" class="flex items-center gap-4 justify-center md:justify-start mb-8 group">
+                        <img src="logo/IMG_2014.PNG" class="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Virendra Textrioum Logo">
+                        <span class="text-2xl font-serif font-bold tracking-[0.2em] uppercase gold-gradient-text">Virendra Textrioum</span>
+                    </a>
+                    <p class="text-gray-400 text-lg leading-relaxed font-light mb-8 max-w-sm mx-auto md:mx-0">
+                        Elevating menswear globally with premium, traditionally rooted clothing for the modern individual. Experience true Indian royalty.
+                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent transition-all duration-300"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent transition-all duration-300"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent transition-all duration-300"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10 text-center md:text-left">
+                    <div>
+                        <h4 class="font-bold uppercase tracking-[0.2em] text-xs text-accent mb-6">Collections</h4>
+                        <ul class="space-y-4 text-sm text-gray-400 font-light">
+                            <li><a href="shop.html" class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-300">The Royal Sherwanis</a></li>
+                            <li><a href="shop.html" class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-300">Heritage Kurtas</a></li>
+                            <li><a href="shop.html" class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-300">Bespoke Suiting</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold uppercase tracking-[0.2em] text-xs text-accent mb-6">Explore</h4>
+                        <ul class="space-y-4 text-sm text-gray-400 font-light">
+                            <li><a href="about.html" class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-300">Our Heritage</a></li>
+                            <li><a href="lookbook.html" class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-300">Lookbook 2026</a></li>
+                            <li><a href="faq.html" class="hover:text-accent hover:translate-x-1 inline-block transition-all duration-300">Client Services</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <h4 class="font-bold uppercase tracking-[0.2em] text-xs text-accent mb-6">Newsletter</h4>
+                        <p class="text-sm text-gray-400 font-light mb-4">Subscribe for private access to new releases.</p>
+                        <form class="flex border-b border-gray-700 focus-within:border-accent transition-colors pb-2">
+                            <input type="email" placeholder="Email Address" class="bg-transparent w-full focus:outline-none text-white text-sm placeholder-gray-500">
+                            <button type="submit" class="text-accent hover:text-white transition-colors">
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 uppercase tracking-widest font-semibold">
+                <p>&copy; 2026 Virendra Textrioum. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

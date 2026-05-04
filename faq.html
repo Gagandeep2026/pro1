@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ & Support | Virendra Textrioum</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: '#050507', 
+                        secondary: '#1a1b21', 
+                        accent: '#d4af37', 
+                        accentDark: '#aa8c2c',
+                        surface: '#f3f1ec' 
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                } 
+            } 
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .reveal-delay-1 { transition-delay: 150ms; }
+        .reveal-delay-2 { transition-delay: 300ms; }
+        .reveal-delay-3 { transition-delay: 450ms; }
+        .reveal-delay-4 { transition-delay: 600ms; }
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .glass-accordion {
+            background: rgba(26, 27, 33, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .glass-accordion:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-primary text-white antialiased flex flex-col min-h-screen selection:bg-accent selection:text-primary">
+
+    <!-- Premium Navigation -->
+    <nav class="fixed w-full z-50 py-4 border-b border-white/5 bg-primary/95 backdrop-blur-md shadow-2xl">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <img src="logo/IMG_2014.PNG" class="h-10 md:h-12 w-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-xl md:text-2xl font-serif font-bold tracking-[0.25em] uppercase gold-gradient-text drop-shadow-lg transition-all duration-500 hidden sm:block">Virendra Textrioum</span>
+            </a>
+            <div class="hidden md:flex space-x-10 items-center text-xs uppercase tracking-[0.2em] font-semibold text-gray-300">
+                <a href="shop.html" class="hover:text-accent transition-colors duration-300">Shop</a>
+                <a href="lookbook.html" class="hover:text-accent transition-colors duration-300">Lookbook</a>
+                <a href="about.html" class="hover:text-accent transition-colors duration-300">Heritage</a>
+                <a href="faq.html" class="text-accent relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[1px] after:bg-accent">Client Services</a>
+            </div>
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-white hover:text-accent focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-40 pb-24 relative overflow-hidden" x-data="{ active: false }" x-intersect.threshold.20="active = true">
+        <!-- Glow Orbs -->
+        <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-accent/5 blur-[150px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 -left-1/4 w-[600px] h-[600px] bg-accent/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 max-w-4xl relative z-10">
+            
+            <div class="text-center mb-24 reveal" :class="{ 'active': active }">
+                <div class="w-20 h-20 rounded-full border border-accent/20 flex items-center justify-center mx-auto mb-8 bg-primary/50 backdrop-blur-md shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                    <i data-lucide="help-circle" class="w-10 h-10 text-accent"></i>
+                </div>
+                <p class="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-4">Support & Information</p>
+                <h1 class="text-5xl md:text-7xl font-serif mb-8 text-white drop-shadow-xl">Curated Knowledge</h1>
+                <div class="flex items-center justify-center gap-4">
+                    <span class="w-12 h-[1px] bg-accent/50"></span>
+                    <i data-lucide="diamond" class="w-3 h-3 text-accent animate-pulse-slow"></i>
+                    <span class="w-12 h-[1px] bg-accent/50"></span>
+                </div>
+            </div>
+
+            <div class="space-y-6" x-data="{ expanded: null }">
+                <!-- FAQ 1 -->
+                <div class="glass-accordion rounded-xl overflow-hidden reveal reveal-delay-1" :class="{ 'active': active }">
+                    <button @click="expanded = expanded === 1 ? null : 1" class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none bg-transparent">
+                        <span class="font-serif text-2xl tracking-wide text-white transition-colors" :class="expanded === 1 ? 'text-accent' : ''">Where are your garments manufactured?</span>
+                        <div class="w-10 h-10 rounded-full border border-accent/30 flex justify-center items-center overflow-hidden shrink-0 bg-primary/30">
+                            <i data-lucide="plus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded !== 1"></i>
+                            <i data-lucide="minus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded === 1" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="expanded === 1" x-collapse>
+                        <div class="px-8 pb-8 pt-2 text-gray-300 font-light text-lg leading-relaxed border-t border-white/5 mx-4">
+                            All Virendra Textrioum garments are passionately hand-finished in our dedicated Indian ateliers in Surat. We exclusively employ revered traditional tailoring methods, ensuring our generational master weavers create unparalleled structural quality from local heritage fabrics.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-accordion rounded-xl overflow-hidden reveal reveal-delay-2" :class="{ 'active': active }">
+                    <button @click="expanded = expanded === 2 ? null : 2" class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none bg-transparent">
+                        <span class="font-serif text-2xl tracking-wide text-white transition-colors" :class="expanded === 2 ? 'text-accent' : ''">What is your bespoke return policy?</span>
+                        <div class="w-10 h-10 rounded-full border border-accent/30 flex justify-center items-center overflow-hidden shrink-0 bg-primary/30">
+                            <i data-lucide="plus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded !== 2"></i>
+                            <i data-lucide="minus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded === 2" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="expanded === 2" x-collapse>
+                        <div class="px-8 pb-8 pt-2 text-gray-300 font-light text-lg leading-relaxed border-t border-white/5 mx-4">
+                            Given the intricate, custom-tailored nature of our royal collections, bespoke items cannot be returned. Ready-to-wear items may be returned within 14 days of delivery, provided they remain completely unworn, unwashed, and still preserve all original heirloom tagging.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-accordion rounded-xl overflow-hidden reveal reveal-delay-3" :class="{ 'active': active }">
+                    <button @click="expanded = expanded === 3 ? null : 3" class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none bg-transparent">
+                        <span class="font-serif text-2xl tracking-wide text-white transition-colors" :class="expanded === 3 ? 'text-accent' : ''">How should I care for royal silk garments?</span>
+                        <div class="w-10 h-10 rounded-full border border-accent/30 flex justify-center items-center overflow-hidden shrink-0 bg-primary/30">
+                            <i data-lucide="plus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded !== 3"></i>
+                            <i data-lucide="minus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded === 3" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="expanded === 3" x-collapse>
+                        <div class="px-8 pb-8 pt-2 text-gray-300 font-light text-lg leading-relaxed border-t border-white/5 mx-4">
+                            Exquisite Banarasi silks and velvet combinations rigidly demand professional, eco-friendly dry cleaning. We highly advise keeping garments housed in our complimentary breathable cotton garment bags away from direct sunlight. Never employ standard machine washing.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="glass-accordion rounded-xl overflow-hidden reveal reveal-delay-4" :class="{ 'active': active }">
+                    <button @click="expanded = expanded === 4 ? null : 4" class="w-full px-8 py-8 flex justify-between items-center text-left focus:outline-none bg-transparent">
+                        <span class="font-serif text-2xl tracking-wide text-white transition-colors" :class="expanded === 4 ? 'text-accent' : ''">Do you facilitate worldwide diplomatic shipping?</span>
+                        <div class="w-10 h-10 rounded-full border border-accent/30 flex justify-center items-center overflow-hidden shrink-0 bg-primary/30">
+                            <i data-lucide="plus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded !== 4"></i>
+                            <i data-lucide="minus" class="w-5 h-5 text-accent transition-transform duration-500" x-show="expanded === 4" x-cloak></i>
+                        </div>
+                    </button>
+                    <div x-show="expanded === 4" x-collapse>
+                        <div class="px-8 pb-8 pt-2 text-gray-300 font-light text-lg leading-relaxed border-t border-white/5 mx-4">
+                            Absolutely. We orchestrate highly secure global shipping via our trusted logistics partners. Bespoke transit times conventionally average 4-9 business days depending heavily on your territory. Customs and specialized duties undergo calculation exclusively at checkout.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Follow-up Call to Action -->
+            <div class="mt-24 text-center pt-8 reveal" :class="{ 'active': active }" style="transition-delay: 800ms">
+                <p class="text-gray-400 font-light mb-8 text-xl">Still require further regal assistance?</p>
+                <a href="contact.html" class="inline-flex items-center gap-3 border border-accent/50 text-accent px-10 py-5 uppercase tracking-[0.2em] text-sm font-bold hover:bg-accent hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.1)] hover:shadow-[0_0_40px_rgba(212,175,55,0.3)]">
+                    Engage Client Services <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Exquisite Footer -->
+    <footer class="bg-primary text-white pt-24 pb-8 border-t-4 border-accent relative overflow-hidden mt-10">
+        <div class="container mx-auto px-6 md:px-12 relative z-10 text-center">
+            <a href="index.html" class="flex items-center gap-4 justify-center mb-6 group">
+                <img src="logo/IMG_2014.PNG" class="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" alt="Virendra Textrioum Logo">
+                <span class="text-xl font-serif font-bold tracking-[0.25em] uppercase gold-gradient-text">Virendra Textrioum</span>
+            </a>
+            <p class="text-gray-500 text-xs font-light tracking-widest uppercase">&copy; 2026 Virendra Textrioum. Supreme Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
