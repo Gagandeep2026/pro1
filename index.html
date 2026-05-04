@@ -93,6 +93,11 @@
     </style>
 </head>
 <body class="bg-primary text-surface antialiased flex flex-col min-h-screen selection:bg-accent selection:text-primary">
+    <!-- Dynamic Elements -->
+    <div class="noise-overlay"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
 
     <!-- Premium Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-700 py-6 border-b border-white/5" 
@@ -147,7 +152,7 @@
             <!-- Background Images -->
             <template x-for="(slide, index) in slides" :key="index">
                 <div class="absolute inset-0 z-0 transition-opacity duration-1000 ease-in-out" :class="activeSlide === index ? 'opacity-100' : 'opacity-0'">
-                    <img :src="slide.image" class="w-full h-full object-cover transform transition-transform duration-[10s]" style="object-position: center;" :class="activeSlide === index ? 'scale-100' : 'scale-105'" alt="Virendra Slider Image">
+                    <img :src="slide.image" class="w-full h-full object-cover transform transition-transform duration-[10s]" style="object-position: center;" :class="activeSlide === index ? 'animate-slow-pan scale-100' : 'scale-105'" alt="Virendra Slider Image">
                 </div>
             </template>
 
@@ -161,12 +166,12 @@
                          :class="activeSlide === index ? 'opacity-100 translate-y-0 z-10 pointer-events-auto' : 'opacity-0 translate-y-8 z-0 pointer-events-none'">
                         
                         <h1 class="text-[#2c3545] text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-medium mb-8 leading-[1.25] tracking-wide font-sans uppercase drop-shadow-sm transition-all duration-1000 delay-300 transform" :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
-                            <span x-text="slide.title1"></span><br>
-                            <span x-text="slide.title2"></span>
+                            <span class="stagger-text" x-text="slide.title1"></span><br>
+                            <span class="stagger-text" x-text="slide.title2"></span>
                         </h1>
                         
                         <div class="transition-all duration-1000 delay-500 transform" :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'">
-                            <a href="shop.html" class="inline-block border border-[#2c3545] text-[#2c3545] px-10 py-3 rounded-full uppercase tracking-widest text-sm hover:bg-[#2c3545] hover:text-white transition-colors duration-300 font-semibold shadow-sm bg-white/20 backdrop-blur-sm pointer-events-auto">Shop Now</a>
+                            <a href="shop.html" class="magnetic-btn inline-block border border-[#2c3545] text-[#2c3545] px-10 py-3 rounded-full uppercase tracking-widest text-sm hover:bg-[#2c3545] hover:text-white transition-colors duration-300 font-semibold shadow-sm bg-white/20 backdrop-blur-sm pointer-events-auto">Shop Now</a>
                         </div>
                     </div>
                 </template>
@@ -183,7 +188,9 @@
         <!-- The Artisan Collection Highlights -->
         <section class="py-32 bg-primary relative overflow-hidden border-t border-accent/10">
             <!-- Background Orbs -->
-            <div class="absolute -right-1/4 top-1/4 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="ambient-orb w-[600px] h-[600px] bg-accentDark/10 -top-40 -left-40"></div>
+            <div class="ambient-orb w-[800px] h-[800px] bg-accent/5 -right-1/4 top-1/4" style="animation-delay: -5s;"></div>
+
 
             <div class="container mx-auto px-6 md:px-12 text-center mb-24" x-data="{ active: false }" x-intersect.threshold.20="active = true">
                 <p class="uppercase tracking-[0.4em] text-accent text-xs font-bold mb-4 reveal" :class="{ 'active': active }">Meticulous Craft</p>
@@ -193,48 +200,51 @@
             <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" x-data="{ active: false }" x-intersect.threshold.10="active = true">
                 
                 <!-- Item 1 -->
-                <div class="group relative overflow-hidden border border-white/5 reveal" :class="{ 'active': active }">
-                    <div class="h-[600px] w-full overflow-hidden">
+                <div class="group relative overflow-hidden border border-white/5 reveal tilt-card" :class="{ 'active': active }">
+                    <div class="h-[600px] w-full overflow-hidden tilt-card-content">
+                        <div class="tilt-glare"></div>
                         <img src="img/img19.jpg" alt="Sherwani" class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2s] ease-out">
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
-                    <div class="absolute bottom-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>
+                    <div class="absolute bottom-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 tilt-card-content pointer-events-none">
                         <p class="text-accent text-[9px] uppercase tracking-[0.3em] font-bold mb-2">Heritage</p>
                         <h3 class="text-2xl font-serif text-white mb-4">The Royal Sherwani</h3>
-                        <a href="shop.html" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white hover:text-accent transition-colors">View Piece <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="shop.html" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white hover:text-accent transition-colors pointer-events-auto">View Piece <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
                     </div>
                 </div>
 
                 <!-- Item 2 -->
-                <div class="group relative overflow-hidden border border-white/5 reveal reveal-delay-1" :class="{ 'active': active }">
-                    <div class="h-[600px] w-full overflow-hidden">
+                <div class="group relative overflow-hidden border border-white/5 reveal reveal-delay-1 tilt-card" :class="{ 'active': active }">
+                    <div class="h-[600px] w-full overflow-hidden tilt-card-content">
+                        <div class="tilt-glare"></div>
                         <img src="img/img18.jpg" alt="Bandi" class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2s] ease-out">
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
-                    <div class="absolute bottom-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>
+                    <div class="absolute bottom-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 tilt-card-content pointer-events-none">
                         <p class="text-accent text-[9px] uppercase tracking-[0.3em] font-bold mb-2">Modern Tailoring</p>
                         <h3 class="text-2xl font-serif text-white mb-4">Silk Nehru Jackets</h3>
-                        <a href="shop.html" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white hover:text-accent transition-colors">View Piece <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="shop.html" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white hover:text-accent transition-colors pointer-events-auto">View Piece <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
                     </div>
                 </div>
 
                 <!-- Item 3 -->
-                <div class="group relative overflow-hidden border border-white/5 reveal reveal-delay-2" :class="{ 'active': active }">
-                    <div class="h-[600px] w-full overflow-hidden">
+                <div class="group relative overflow-hidden border border-white/5 reveal reveal-delay-2 tilt-card" :class="{ 'active': active }">
+                    <div class="h-[600px] w-full overflow-hidden tilt-card-content">
+                        <div class="tilt-glare"></div>
                         <img src="img/img15.jpg" alt="Kurta" class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2s] ease-out">
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500"></div>
-                    <div class="absolute bottom-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>
+                    <div class="absolute bottom-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 tilt-card-content pointer-events-none">
                         <p class="text-accent text-[9px] uppercase tracking-[0.3em] font-bold mb-2">Timeless</p>
                         <h3 class="text-2xl font-serif text-white mb-4">Signature Kurtas</h3>
-                        <a href="shop.html" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white hover:text-accent transition-colors">View Piece <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="shop.html" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white hover:text-accent transition-colors pointer-events-auto">View Piece <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
                     </div>
                 </div>
 
             </div>
             
             <div class="text-center mt-20" x-data="{ active: false }" x-intersect.threshold.20="active = true">
-                <a href="shop.html" class="inline-block border border-accent text-accent px-12 py-5 uppercase tracking-widest text-xs font-bold hover:bg-accent hover:text-primary transition-all duration-500 reveal" :class="{ 'active': active }">
+                <a href="shop.html" class="magnetic-btn inline-block border border-accent text-accent px-12 py-5 uppercase tracking-widest text-xs font-bold hover:bg-accent hover:text-primary transition-all duration-500 reveal" :class="{ 'active': active }">
                     View Entire Collection
                 </a>
             </div>
@@ -318,6 +328,112 @@
 
     <script>
         lucide.createIcons();
+
+        // Custom Cursor Logic
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        
+        if (window.matchMedia("(pointer: fine)").matches) {
+            let mouseX = 0, mouseY = 0;
+            let ringX = 0, ringY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+            });
+
+            // Smooth following for the ring
+            function animateRing() {
+                ringX += (mouseX - ringX) * 0.15;
+                ringY += (mouseY - ringY) * 0.15;
+                cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+                requestAnimationFrame(animateRing);
+            }
+            animateRing();
+
+            // Hover state for interactive elements
+            const interactables = document.querySelectorAll('a, button, .magnetic-btn');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
+        }
+
+        // Magnetic Buttons Logic
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translate(0px, 0px)';
+                this.style.transition = 'transform 0.5s ease';
+            });
+            btn.addEventListener('mouseenter', function() {
+                this.style.transition = 'none';
+            });
+        });
+
+        // 3D Card Tilt Logic
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max tilt 10deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                
+                // Glare effect
+                const glare = this.querySelector('.tilt-glare');
+                if(glare) {
+                    const glareX = (x / rect.width) * 100;
+                    const glareY = (y / rect.height) * 100;
+                    glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2) 0%, transparent 60%)`;
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            });
+        });
+
+        // Staggered Text Reveal logic
+        document.addEventListener('alpine:init', () => {
+            // Let alpine handle the text update first, then wrap words
+            setTimeout(() => {
+                document.querySelectorAll('.stagger-text').forEach(el => {
+                    const text = el.innerText;
+                    el.innerHTML = '';
+                    const words = text.split(' ');
+                    words.forEach((word, wordIndex) => {
+                        const span = document.createElement('span');
+                        span.className = 'inline-block mr-[0.25em]';
+                        
+                        [...word].forEach((char, charIndex) => {
+                            const charSpan = document.createElement('span');
+                            charSpan.className = 'char-reveal';
+                            charSpan.style.animationDelay = `${(wordIndex * 0.1) + (charIndex * 0.03)}s`;
+                            charSpan.innerText = char;
+                            span.appendChild(charSpan);
+                        });
+                        
+                        el.appendChild(span);
+                    });
+                });
+            }, 500); // give alpine a moment to inject title1/title2
+        });
     </script>
 </body>
 </html>
